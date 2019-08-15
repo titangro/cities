@@ -1,6 +1,6 @@
 import * as types from '../constants/types';
 
-export function createError(error, info) {
+export const createError = (error, info) => {
     return dispatch => 
         dispatch({
             type: types.app.ERROR,
@@ -9,7 +9,7 @@ export function createError(error, info) {
         })    
 }
 
-export function deleteError() {
+export const deleteError = () => {
     return dispatch => 
         dispatch({
             type: types.app.ERROR_DELETE
