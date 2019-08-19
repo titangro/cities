@@ -1,33 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-//import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import { connect } from 'react-redux';
-import { getCities, showCity } from './actions/cities';
-//import { createError, deleteError } from './actions/error';
+import { fetchCities, fetchCity } from './actions/cities';
 
-const App = (props) => {
+import CitiesList from './components/CitiesList';
+import Main from './components/Main';
+import City from './components/City';
 
-  /*componentWillMount() {
-    this.props.fetchData("https://4", {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({})
-    })
-  }*/
-  
+const App = (props) => {  
+
   console.log(props)
 
+  const history = createBrowserHistory({
+    basename: process.env.PUBLIC_URL
+  });
+
   return (
-    <div className="wrapper">
-      test
-    </div>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <div className="wrapper">        
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/list">
+            <CitiesList {...props} history={history} />                        
+          </Route>
+          <Route path="/search/:cityId" children={
+            ({match}) => <City {...props} cityId={match.params.cityId} />} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   )
 }
 
@@ -42,7 +45,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (url, params) => dispatch(getCities(url, params)),
+    fetchCities: (url) => dispatch(fetchCities(url)),
+    fetchCity: (url) => dispatch(fetchCity(url)),
   };
 };
 

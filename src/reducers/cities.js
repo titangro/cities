@@ -14,8 +14,8 @@ export function cities(state = initialState.cities, action) {
 export function city(state = initialState.city, action) {
     switch (action.type) {
         case types.cities.SHOW:
-            const { city } = action;
-            return city;
+            const { city, salaries, scores, details } = action;
+            return {...city, salaries, scores, details};
         default:
             return state;
     }
