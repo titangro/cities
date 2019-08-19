@@ -11,6 +11,7 @@ export const fetchCitiesSuccess = cities => dispatch => {
     }
 
 export const fetchCitySuccess = city => dispatch => {
+    if (city._links['city:urban_area']) {
         const url = city._links['city:urban_area'].href;
         Promise.all(
             [
@@ -35,7 +36,13 @@ export const fetchCitySuccess = city => dispatch => {
                     details
                 })
             })
+    } else {
+        dispatch({
+            type: types.cities.SHOW,
+            city,
+        })
     }
+}
 
 
 export const fetchCities = (url) => {
