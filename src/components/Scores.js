@@ -8,14 +8,16 @@ const Scores = ({data, cityId, fetchCity, apiRoot}) => {
 
     let svgDiv;
 
-    useEffect(() => {        
+    useEffect(() => {
+        d3.select(svgDiv).selectAll('*').remove();
+
         const canvasHeight = 400;        
         const canvasWidth = '100%';
         const scale = 20;
         const svgCanvas = d3.select(svgDiv)
             .append('svg')
             .attr('width', canvasWidth)
-            .attr('height', canvasHeight)
+            .attr('height', canvasHeight);
 
         svgCanvas.selectAll('rect')
             .data(data.categories).enter()
@@ -32,8 +34,8 @@ const Scores = ({data, cityId, fetchCity, apiRoot}) => {
                 .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration)
                 .attr('y', (datapoint) => canvasHeight - datapoint.score_out_of_10 * scale - 10)
                 .attr('transform', (datapoint, iteration) => `rotate(-90, ${svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration + 5}, ${canvasHeight - datapoint.score_out_of_10 * scale - 30})`)
-                .text(datapoint => datapoint.name)
-    })
+                .text(datapoint => datapoint.name);
+    }, [data])
     
 
     return <Container>
