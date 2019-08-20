@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container, ListGroup } from 'react-bootstrap';
+import { Container, ListGroup, Row, Col } from 'react-bootstrap';
+
+import Salaries from './Salaries';
+import Scores from './Scores';
+import Details from './Details';
 
 const City = ({city, cityId, fetchCity, apiRoot}) => {
     useEffect(() => {
@@ -25,7 +29,27 @@ const City = ({city, cityId, fetchCity, apiRoot}) => {
                 Население: {city.population.toLocaleString('ru-RU')} человек
             </ListGroup.Item>
             <ListGroup.Item as="li">
-                {city.salaries || city.scores || city.details ? 'Есть подробные данные'
+                {city.salaries || city.scores || city.details ? 
+                    <React.Fragment>
+                        <Container>
+                            Есть подробные данные
+                        </Container>
+                        <Row>
+                            <Col>
+                                <Salaries data={city.salaries} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Scores data={city.scores} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Details data={city.details} />
+                            </Col>
+                        </Row>
+                    </React.Fragment>
                     : 'Подробные данные отсутсвуют'
                 }
             </ListGroup.Item>
