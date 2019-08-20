@@ -31,6 +31,7 @@ const Scores = ({data, cityId, fetchCity, apiRoot}) => {
                 .append('text')
                 .attr('x', (datapoint, iteration) => iteration * 45)
                 .attr('y', (datapoint) => canvasHeight - datapoint.score_out_of_10 * scale - 10)
+                .attr('transform', (datapoint, iteration) => `rotate(-90, ${iteration * 45 + 5}, ${canvasHeight - datapoint.score_out_of_10 * scale - 30})`)
                 .text(datapoint => datapoint.name)
     })
     
