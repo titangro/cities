@@ -20,18 +20,18 @@ const Scores = ({data, cityId, fetchCity, apiRoot}) => {
         svgCanvas.selectAll('rect')
             .data(data.categories).enter()
                 .append('rect')
-                .attr('width', 40)
+                .attr('width', 45)
                 .attr('height', (datapoint) => datapoint.score_out_of_10 * 20)
                 .attr('fill', (datapoint) => datapoint.color)
-                .attr('x', (datapoint, iteration) => iteration * 45)
+                .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration)
                 .attr('y', (datapoint) => canvasHeight - datapoint.score_out_of_10 * scale);
         
         svgCanvas.selectAll('text')
             .data(data.categories).enter()
                 .append('text')
-                .attr('x', (datapoint, iteration) => iteration * 45)
+                .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration)
                 .attr('y', (datapoint) => canvasHeight - datapoint.score_out_of_10 * scale - 10)
-                .attr('transform', (datapoint, iteration) => `rotate(-90, ${iteration * 45 + 5}, ${canvasHeight - datapoint.score_out_of_10 * scale - 30})`)
+                .attr('transform', (datapoint, iteration) => `rotate(-90, ${svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration + 5}, ${canvasHeight - datapoint.score_out_of_10 * scale - 30})`)
                 .text(datapoint => datapoint.name)
     })
     
