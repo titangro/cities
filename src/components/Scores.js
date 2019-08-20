@@ -41,6 +41,16 @@ const Scores = ({data, cityId, fetchCity, apiRoot}) => {
                 .duration(800)
                 .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration)             
                 .text(datapoint => datapoint.name);
+        svgCanvas.selectAll(".scores")
+            .data(data.categories).enter()
+                .append("text")
+                .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration - 10)
+                .attr('y', (datapoint) => canvasHeight -  10)
+                .attr('fill', '#ffffff')           
+                .transition()
+                .duration(800)
+                .attr('x', (datapoint, iteration) => svgCanvas.node().getBoundingClientRect().width/data.categories.length * iteration + 10)             
+                .text(datapoint => datapoint.score_out_of_10.toFixed(1));
     }, [data])
     
 
