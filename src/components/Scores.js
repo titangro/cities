@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import * as d3 from "d3";
 
-import { Container, ListGroup, Row, Col } from 'react-bootstrap';
+import { Container, ListGroup } from 'react-bootstrap';
 
-const Scores = ({data, cityId, fetchCity, apiRoot}) => {
+const Scores = ({data}) => {
 
     let svgDiv;
 
