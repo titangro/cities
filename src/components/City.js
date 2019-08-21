@@ -19,13 +19,10 @@ const City = ({city, cityId, fetchCity, apiRoot}) => {
             <ListGroup.Item as="li">
                 Местонахождение: {city.full_name}
             </ListGroup.Item>
-            <ListGroup.Item as="li" active>
+            <ListGroup.Item as="li">
                 Координаты: {city.location.latlon.latitude} {city.location.latlon.longitude}
             </ListGroup.Item>
             <ListGroup.Item as="li">
-                Morbi leo risus
-            </ListGroup.Item>
-            <ListGroup.Item as="li" active>
                 Население: {city.population.toLocaleString('ru-RU')} человек
             </ListGroup.Item>
             <ListGroup.Item as="li">
