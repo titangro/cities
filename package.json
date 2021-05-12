@@ -14,7 +14,7 @@
     "lodash": "^4.17.15",
     "lodash.template": "^4.5.0",
     "mem": "^5.1.1",
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.11",
     "react-dev-utils": "^9.0.3",
